@@ -1,0 +1,133 @@
+# 默认配置文件
+# 自动生成ASS字幕配置
+
+# 输入输出路径
+paths:
+  # 输入视频/音频文件路径
+  input_file: "F:/otherCodes/auto-ass-gen/input/test.mp4"
+  
+  # 输出wav文件路径（音频提取后的临时文件）
+  output_wav: "F:/otherCodes/auto-ass-gen/output/audio.wav"
+  
+  # 输出ASS字幕文件路径
+  output_ass: "F:/otherCodes/auto-ass-gen/output/subtitle.ass"
+
+# 音频处理配置
+audio:
+  # 采样率（Hz），Silero VAD要求16000Hz
+  sample_rate: 16000
+  
+  # FFmpeg可执行文件路径，如果在系统PATH中可直接使用"ffmpeg"
+  ffmpeg_path: "C:/ffmpeg-8.0-essentials_build/bin/ffmpeg.exe"
+
+# VAD（语音活动检测）配置
+vad:
+  # 是否使用ONNX模型（推荐，速度更快）
+  use_onnx: true
+  
+  # 语音检测阈值（0-1），值越大越严格
+  threshold: 0.5
+  
+  # 最小语音持续时间（毫秒）
+  min_speech_duration_ms: 250
+  
+  # 最大语音持续时间（秒），超过此时间会自动分割
+  max_speech_duration_s: .inf
+  
+  # 最小静音持续时间（毫秒）
+  min_silence_duration_ms: 100
+  
+  # 语音片段前后填充时间（毫秒）
+  speech_pad_ms: 30
+
+# ASS字幕样式配置
+subtitle:
+  # 字幕标题
+  title: "自动生成字幕"
+  
+  # 视频分辨率（用于字幕定位）
+  resolution:
+    width: 1280
+    height: 720
+  
+  # 时间戳合并配置
+  # 间隔阈值（秒）：若两段语音的间隔时间不超过此值，则可能被合并
+  merge_gap_threshold: 1.0
+  
+  # 最小间隔（秒）：小于此值时调整时间戳使其相连
+  merge_min_gap: 0.5
+  
+  # 单个字幕最大时长（秒）：超过此时长不再合并
+  merge_max_duration: 15.0
+  
+  # 字幕样式
+  style:
+    # 样式名称
+    name: "Default"
+    
+    # 字体名称
+    fontname: "Microsoft YaHei"
+    
+    # 字体大小
+    fontsize: 48
+    
+    # 主要颜色（&H开头的BGR格式，&H00FFFFFF是白色）
+    primary_colour: "&H00FFFFFF"
+    
+    # 次要颜色
+    secondary_colour: "&H000000FF"
+    
+    # 边框颜色
+    outline_colour: "&H00000000"
+    
+    # 背景颜色
+    back_colour: "&H80000000"
+    
+    # 是否粗体（0或1）
+    bold: 0
+    
+    # 是否斜体（0或1）
+    italic: 0
+    
+    # 是否下划线（0或1）
+    underline: 0
+    
+    # 是否删除线（0或1）
+    strikeout: 0
+    
+    # X轴缩放比例
+    scale_x: 100
+    
+    # Y轴缩放比例
+    scale_y: 100
+    
+    # 字符间距
+    spacing: 0
+    
+    # 旋转角度
+    angle: 0
+    
+    # 边框样式（1=边框+阴影，3=不透明框）
+    border_style: 1
+    
+    # 边框宽度
+    outline: 2
+    
+    # 阴影深度
+    shadow: 3
+    
+    # 对齐方式（1-9，小键盘布局，2=底部居中）
+    alignment: 2
+    
+    # 左边距
+    margin_l: 10
+    
+    # 右边距
+    margin_r: 10
+    
+    # 垂直边距
+    margin_v: 25
+    
+    # 编码
+    encoding: 1
+

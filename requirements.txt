@@ -1,0 +1,33 @@
+# 自动生成ASS字幕文件 - 依赖包列表
+
+# PyTorch - Silero VAD 依赖
+torch>=1.12.0
+
+# TorchAudio - 音频处理
+# 注意：本项目兼容新版本的torchaudio API
+torchaudio>=0.12.0
+
+# SoundFile - torchaudio的音频后端（推荐）
+# 用于避免torchcodec依赖
+soundfile>=0.12.1
+
+# ONNX Runtime - 用于ONNX模型推理（推荐，速度更快）
+onnxruntime>=1.16.1
+
+# Silero VAD - 语音活动检测
+silero-vad>=5.0.0
+
+# YAML配置文件支持
+pyyaml>=6.0
+
+# 注意事项：
+# 1. FFmpeg 需要单独安装并添加到系统PATH
+#    - Windows: 从 https://ffmpeg.org/download.html 下载
+#    - Linux: sudo apt-get install ffmpeg
+#    - macOS: brew install ffmpeg
+#
+# 2. soundfile 需要系统级的 libsndfile 库
+#    - Windows: 通常pip安装时会自动下载
+#    - Linux: sudo apt-get install libsndfile1
+#    - macOS: brew install libsndfile
+
