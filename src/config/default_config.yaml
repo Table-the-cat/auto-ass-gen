@@ -26,16 +26,16 @@ vad:
   use_onnx: true
   
   # 语音检测阈值（0-1），值越大越严格
-  threshold: 0.5
+  threshold: 0.4
   
   # 最小语音持续时间（毫秒）
   min_speech_duration_ms: 250
   
   # 最大语音持续时间（秒），超过此时间会自动分割
-  max_speech_duration_s: .inf
+  max_speech_duration_s: 15
   
   # 最小静音持续时间（毫秒）
-  min_silence_duration_ms: 100
+  min_silence_duration_ms: 1000
   
   # 语音片段前后填充时间（毫秒）
   speech_pad_ms: 30
