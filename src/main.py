@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from config import load_config
-from util import AudioExtractor, seconds_to_ass_time, merge_close_timestamps, ASSWriter
+from util import AudioExtractor, seconds_to_ass_time, pre_process, ASSWriter
 from vad import VADProcessor
 
 
@@ -168,22 +168,17 @@ class ASSGenerator:
         output_ass = self.config.output_ass
         
         try:
-            # 合并间隔过小的语音片段（配置参数在函数内部读取）
-            merged_timestamps = merge_close_timestamps(timestamps, config=self.config)
+            # 预处理时间戳，调整间隔过小的语音片段
+            processed_timestamps = pre_process(timestamps, config=self.config)
             
-            print(f"\n时间戳合并配置:")
-            print(f"  - 间隔阈值: {self.config.merge_gap_threshold}秒")
+            print(f"\n时间戳预处理配置:")
             print(f"  - 最小间隔: {self.config.merge_min_gap}秒")
-            print(f"  - 最大时长: {self.config.merge_max_duration}秒")
-            print(f"\n合并结果:")
-            print(f"  - 合并前: {len(timestamps)} 个片段")
-            print(f"  - 合并后: {len(merged_timestamps)} 个片段")
-            if len(timestamps) > len(merged_timestamps):
-                print(f"  - 减少了: {len(timestamps) - len(merged_timestamps)} 个片段")
+            print(f"\n预处理结果:")
+            print(f"  - 片段数量: {len(processed_timestamps)} 个")
             
             # 转换时间格式
             ass_timestamps = []
-            for ts in merged_timestamps:
+            for ts in processed_timestamps:
                 ass_ts = {
                     'start': seconds_to_ass_time(ts['start']),
                     'end': seconds_to_ass_time(ts['end'])

@@ -50,15 +50,9 @@ subtitle:
     width: 1280
     height: 720
   
-  # 时间戳合并配置
-  # 间隔阈值（秒）：若两段语音的间隔时间不超过此值，则可能被合并
-  merge_gap_threshold: 1.0
-  
+  # 时间戳预处理配置
   # 最小间隔（秒）：小于此值时调整时间戳使其相连
   merge_min_gap: 0.5
-  
-  # 单个字幕最大时长（秒）：超过此时长不再合并
-  merge_max_duration: 15.0
   
   # 字幕样式
   style:

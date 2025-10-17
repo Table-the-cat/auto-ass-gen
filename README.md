@@ -90,6 +90,7 @@ python main.py -c config.yaml -i input.mp4 -o output.ass -w temp_audio.wav
 
 ```yaml
 paths:
+  # 如果paths未生效，尝试使用绝对路径
   input_file: "input/video.mp4"
   output_wav: "output/audio.wav"
   output_ass: "output/subtitle.ass"
@@ -116,6 +117,27 @@ subtitle:
     fontsize: 48
     # ... 更多样式配置
 ```
+
+### 关键参数说明
+
+#### threshold
+语音检测阈值，越大越严格
+
+#### min_speech_duration_ms:
+最短说话时长（毫秒），小于该时长的片段，即使被判定为在说话也会被忽略
+
+#### max_speech_duration_s
+最长说话时长（秒），大于该时长的片段，会在下一个静音片段时被分割
+当一个片段超过该配置的值时，程序在做分割判定时会降低最短静音时长的要求，即使静音片段时长小于min_silence_duration_ms的值也可能被分割
+
+#### min_silence_duration_ms
+最短静音时长（毫秒），大于该值的静音片段（即说话的停顿）才会被分割为不同的字幕
+如果设为1000ms，即一秒：
+``` text
+[说话8秒] → [停顿0.5秒] → [说话7秒] → [停顿0.6秒] → [说话5秒]
+            ❌ 忽略（<1秒）          ❌ 忽略（<1秒）
+```
+结果：生成一个20秒的片段
 
 ## 工作流程
 
