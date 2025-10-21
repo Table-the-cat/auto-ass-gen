@@ -1,0 +1,80 @@
+# 实验配置示例
+# 可以根据实验结果调整这些参数
+
+# 实验1的参数范围
+threshold_experiment:
+  # 要测试的threshold值列表
+  threshold_range:
+    - 0.1
+    - 0.2
+    - 0.3
+    - 0.4
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+  
+  # VAD配置（在测试threshold时保持不变）
+  min_speech_duration_ms: 250
+  min_silence_duration_ms: 1000
+  
+  # 评估配置
+  iou_threshold: 0.5  # IoU阈值，用于判定预测是否匹配真实标注
+
+# 实验2的参数
+min_silence_experiment:
+  # 百分位数，用于确定推荐值
+  percentile: 5.0
+  
+  # 是否分类别统计
+  by_category: true
+
+# 实验3的参数
+merge_gap_experiment:
+  # VAD配置
+  threshold: 0.5  # 可以使用实验1的最优值
+  min_speech_duration_ms: 250
+  min_silence_duration_ms: 1000
+  
+  # 搜索配置
+  search_window: 0.5  # 在连接点附近搜索的窗口大小（秒）
+  tolerance: 0.05     # 判定为"首尾相连"的容差（秒）
+  
+  # 百分位数
+  percentile: 5.0
+
+# 数据配置
+data:
+  # 数据目录
+  data_dir: "exp/data"
+  
+  # 类别要求（用于验证数据分布）
+  categories:
+    live:
+      min_hours: 40
+      max_hours: 50
+    interview:
+      min_hours: 30
+      max_hours: 40
+    radio:
+      min_hours: 10
+      max_hours: 20
+    anime:
+      min_hours: 5
+      max_hours: 10
+
+# 输出配置
+output:
+  results_dir: "exp/results"
+  
+  # 图表配置
+  plot_style: "seaborn"
+  figure_dpi: 300
+  
+  # 是否保存中间结果
+  save_intermediate: true
+  
+  # 日志级别
+  log_level: "INFO"
+

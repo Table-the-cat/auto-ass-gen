@@ -64,7 +64,9 @@ class Config:
     
     @property
     def ffmpeg_path(self):
-        return self.get('audio.ffmpeg_path', 'ffmpeg')
+       path = self.get('audio.ffmpeg_path', 'ffmpeg')
+       # 如果配置文件中显式设置为None或空字符串，使用默认值'ffmpeg'
+       return path if path else 'ffmpeg'
     
     @property
     def use_onnx(self):

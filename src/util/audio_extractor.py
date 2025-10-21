@@ -17,7 +17,8 @@ class AudioExtractor:
         Args:
             ffmpeg_path: FFmpeg可执行文件路径，默认为'ffmpeg'（假设在系统PATH中）
         """
-        self.ffmpeg_path = ffmpeg_path
+        # 如果传入的是None或空字符串，使用默认值'ffmpeg'
+        self.ffmpeg_path = ffmpeg_path if ffmpeg_path else 'ffmpeg'
         
     def extract_audio(self, input_path, output_path, sample_rate=16000):
         """
