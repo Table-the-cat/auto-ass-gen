@@ -167,6 +167,22 @@ class ASSGenerator:
         """
         output_ass = self.config.output_ass
         
+        # 检查output_ass是否为目录路径
+        output_path = Path(output_ass)
+        if output_path.is_dir() or (not output_path.suffix and not output_path.exists()):
+            # 如果是目录或者没有扩展名且不存在（可能是目录），则使用输入文件名
+            input_path = Path(self.config.input_file)
+            output_filename = input_path.stem + '.ass'  # 使用输入文件名（不含扩展名）+ .ass
+            output_ass = str(output_path / output_filename)
+            
+            # 更新config中的output_ass，以便后续打印正确的路径
+            self.config.output_ass = output_ass
+            
+            # 如果目录不存在，创建它
+            output_path.mkdir(parents=True, exist_ok=True)
+            
+            print(f"检测到输出路径为目录，自动生成文件名: {output_filename}")
+        
         try:
             # 预处理时间戳，调整间隔过小的语音片段
             processed_timestamps = pre_process(timestamps, config=self.config)
